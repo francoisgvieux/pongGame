@@ -53,6 +53,7 @@ public class GamePanel extends JPanel implements Runnable {
         paddle1.draw(g);
         paddle2.draw(g);
         ball.draw(g);
+        score.draw(g);
     }
 
     public void move() {
@@ -106,7 +107,17 @@ public class GamePanel extends JPanel implements Runnable {
             ball.setXDirection(-ball.xVelocity);
             ball.setYDirection(-ball.yVelocity);
         }
-        // give
+        // give a player a point and creates new paddles and ball when the ball gets out of the panel
+        if (ball.x <= 0) {
+            score.player2++;
+            newPaddles();
+            newBall();
+        }
+        if (ball.x >= GAME_WIDTH-BALL_DIAMETER) {
+            score.player1++;
+            newPaddles();
+            newBall();
+        }
     }
 
     public void run() {
